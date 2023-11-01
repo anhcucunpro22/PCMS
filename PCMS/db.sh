@@ -1,0 +1,1 @@
+﻿dotnet ef dbcontext scaffold -o EFModels -f -d "Data Source= DESKTOP-CURC7TC\\LEHUY; Initial Catalog=PhotoCMS; User Id= sa; password = 123;Trusted_Connection=False;TrustServerCertificate=True" "Microsoft.EntityFrameworkCore.SqlServer"
