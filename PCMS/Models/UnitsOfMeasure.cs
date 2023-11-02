@@ -19,8 +19,8 @@ namespace PCMS.Models
 
         public bool? IsActive { get; set; }
 
-        public  ICollection<InventoryInDetails> InvenInDetails_2 { get; set; } = new List<InventoryInDetails>();
+        public ICollection<InventoryInDetails>? InvenInDetails_2 { get; set; }
 
-        public  ICollection<InventoryOutDetails> InvenOutDetails_2 { get; set; } = new List<InventoryOutDetails>();
+        public ICollection<InventoryOutDetails>? InvenOutDetails_2 { get; set; }
     }
 }

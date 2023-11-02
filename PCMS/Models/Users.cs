@@ -1,12 +1,13 @@
 ﻿using PCMS.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PCMS.Models
 {
     public class Users
     {
         [Key]
-        public int UserId { get; set; }
+        public int UserID { get; set; }
 
         public string? UserName { get; set; }
 
@@ -20,10 +21,11 @@ namespace PCMS.Models
 
         public bool? Isactive { get; set; }
 
-        public int? CustomerId { get; set; }
+        public int? CustomerID { get; set; }
 
+        [ForeignKey("CustomerID")]
         public  Customers? Ctm_4 { get; set; }
 
-        public  ICollection<UsersRole> URoles { get; set; } = new List<UsersRole>();
+        public  ICollection<UsersRole>? URoles { get; set; }
     }
 }

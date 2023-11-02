@@ -1,17 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PCMS.Models
 {
     public class ReceiptDetail
     {
         [Key]
-        public int ReceiptDetailId { get; set; }
+        public int ReceiptDetailID { get; set; }
 
-        public int? ReceiptId { get; set; }
+        public int? ReceiptID { get; set; }
 
-        public int? ServiceId { get; set; }
+        public int? ServiceID { get; set; }
 
-        public int? PhotocopierId { get; set; }
+        public int? PhotocopierID { get; set; }
 
         public int? Quantity { get; set; }
 
@@ -19,10 +20,13 @@ namespace PCMS.Models
 
         public decimal? TotalAmount { get; set; }
 
+        [ForeignKey("PhotocopierID")]
         public Photocopier? Photo_2 { get; set; }
 
+        [ForeignKey("ReceiptID")]
         public Receipts? Recei_3 { get; set; }
 
+        [ForeignKey("ServiceID")]
         public Service? Ser_2 { get; set; }
     }
 }

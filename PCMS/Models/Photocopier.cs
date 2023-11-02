@@ -1,12 +1,13 @@
 ﻿using PCMS.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PCMS.Models
 {
     public class Photocopier
     {
         [Key]
-        public int PhotocopierId { get; set; }
+        public int PhotocopierID { get; set; }
 
         public string? Manufacturer { get; set; }
 
@@ -26,10 +27,11 @@ namespace PCMS.Models
 
         public bool? IsActive { get; set; }
 
-        public int? FacilityId { get; set; }
+        public int? FacilityID { get; set; }
 
+        [ForeignKey("FacilityID")]
         public TrainingFacilities? Facility_2 { get; set; }
 
-        public ICollection<ReceiptDetail> ReDetails_3 { get; set; } = new List<ReceiptDetail>();
+        public ICollection<ReceiptDetail>? ReDetails_3 { get; set; } 
     }
 }

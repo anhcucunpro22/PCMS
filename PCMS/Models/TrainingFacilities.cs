@@ -20,10 +20,10 @@ namespace PCMS.Models
 
         public string? Website { get; set; }
 
-        public  ICollection<Photocopier> Photo { get; set; } = new List<Photocopier>();
+        public  ICollection<Photocopier>? Photo { get; set; } 
 
-        public  ICollection<RoleFacilities> RoleFaci { get; set; } = new List<RoleFacilities>();
+        public  ICollection<RoleFacilities>? RoleFaci { get; set; } 
 
-        public  ICollection<Warehouses> Wahouses { get; set; } = new List<Warehouses>();
+        public  ICollection<Warehouses>? Wahouses { get; set; }
     }
 }

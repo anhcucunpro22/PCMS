@@ -6,7 +6,7 @@ namespace PCMS.Models
     public class ServiceGroups
     {
         [Key]
-        public int ServiceGroupId { get; set; }
+        public int ServiceGroupID { get; set; }
 
         public string? GroupName { get; set; }
 

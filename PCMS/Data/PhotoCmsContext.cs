@@ -138,9 +138,9 @@ public partial class PhotoCmsContext : DbContext
 
         modelBuilder.Entity<Functions>(entity =>
         {
-            entity.HasKey(e => e.FunctionId).HasName("pk_FunctionID");
+            entity.HasKey(e => e.FunctionID).HasName("pk_FunctionID");
 
-            entity.Property(e => e.FunctionId).HasColumnName("FunctionID");
+            entity.Property(e => e.FunctionID).HasColumnName("FunctionID");
             entity.Property(e => e.FunctionName).HasMaxLength(200);
         });
 
@@ -365,12 +365,12 @@ public partial class PhotoCmsContext : DbContext
 
         modelBuilder.Entity<Photocopier>(entity =>
         {
-            entity.HasKey(e => e.PhotocopierId).HasName("pk_PhotocopierID");
+            entity.HasKey(e => e.PhotocopierID).HasName("pk_PhotocopierID");
 
             entity.ToTable("Photocopier");
 
-            entity.Property(e => e.PhotocopierId).HasColumnName("PhotocopierID");
-            entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
+            entity.Property(e => e.PhotocopierID).HasColumnName("PhotocopierID");
+            entity.Property(e => e.FacilityID).HasColumnName("FacilityID");
             entity.Property(e => e.Location).HasMaxLength(250);
             entity.Property(e => e.Manufacturer)
                 .HasMaxLength(250)
@@ -381,127 +381,127 @@ public partial class PhotoCmsContext : DbContext
             entity.Property(e => e.SerialNumber).HasMaxLength(20);
 
             entity.HasOne(d => d.Facility_2).WithMany(p => p.Photo)
-                .HasForeignKey(d => d.FacilityId)
+                .HasForeignKey(d => d.FacilityID)
                 .HasConstraintName("fk_FacilityID_2");
         });
 
         modelBuilder.Entity<Receipts>(entity =>
         {
-            entity.HasKey(e => e.ReceiptId).HasName("pk_ReceiptID");
+            entity.HasKey(e => e.ReceiptID).HasName("pk_ReceiptID");
 
-            entity.Property(e => e.ReceiptId).HasColumnName("ReceiptID");
-            entity.Property(e => e.AccountId).HasColumnName("AccountID");
+            entity.Property(e => e.ReceiptID).HasColumnName("ReceiptID");
+            entity.Property(e => e.AccountID).HasColumnName("AccountID");
             entity.Property(e => e.AmountReceived)
                 .HasComment("=sum(TotalAmount) - details")
                 .HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.CreatedBy)
+            entity.Property(e => e.Created_by)
                 .HasMaxLength(250)
                 .HasColumnName("Created_by");
-            entity.Property(e => e.CreatedDate)
+            entity.Property(e => e.Created_date)
                 .HasColumnType("date")
                 .HasColumnName("Created_date");
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.CustomerID).HasColumnName("CustomerID");
             entity.Property(e => e.DepositPayment).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.DiscountAmount)
+            entity.Property(e => e.Discount_amount)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("Discount_amount");
-            entity.Property(e => e.ModifiedDate)
+            entity.Property(e => e.Modified_date)
                 .HasColumnType("date")
                 .HasColumnName("Modified_date");
             entity.Property(e => e.PaymentMethod).HasMaxLength(50);
-            entity.Property(e => e.PercentageDiscount)
+            entity.Property(e => e.Percentage_discount)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("Percentage_discount");
-            entity.Property(e => e.PercentageTax)
+            entity.Property(e => e.Percentage_tax)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("Percentage_tax");
             entity.Property(e => e.ReceivedDate).HasColumnType("date");
-            entity.Property(e => e.TaxAmount)
+            entity.Property(e => e.Tax_amount)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("Tax_amount");
-            entity.Property(e => e.TotalAmount)
+            entity.Property(e => e.Total_amount)
                 .HasComment("Total_amount = AmountReceived + tax_amount -Discount_amount - DepositPayment")
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("Total_amount");
 
             entity.HasOne(d => d.Acc).WithMany(p => p.Recei_2)
-                .HasForeignKey(d => d.AccountId)
+                .HasForeignKey(d => d.AccountID)
                 .HasConstraintName("fk_AccountID");
 
             entity.HasOne(d => d.Ctm_3).WithMany(p => p.Recei)
-                .HasForeignKey(d => d.CustomerId)
+                .HasForeignKey(d => d.CustomerID)
                 .HasConstraintName("fk_CustomerID_2");
         });
 
         modelBuilder.Entity<ReceiptDetail>(entity =>
         {
-            entity.HasKey(e => e.ReceiptDetailId).HasName("pk_PhotocopierID_2");
+            entity.HasKey(e => e.ReceiptDetailID).HasName("pk_PhotocopierID_2");
 
             entity.ToTable("ReceiptDetail");
 
-            entity.Property(e => e.ReceiptDetailId).HasColumnName("ReceiptDetailID");
-            entity.Property(e => e.PhotocopierId).HasColumnName("PhotocopierID");
-            entity.Property(e => e.ReceiptId).HasColumnName("ReceiptID");
-            entity.Property(e => e.ServiceId).HasColumnName("ServiceID");
+            entity.Property(e => e.ReceiptDetailID).HasColumnName("ReceiptDetailID");
+            entity.Property(e => e.PhotocopierID).HasColumnName("PhotocopierID");
+            entity.Property(e => e.ReceiptID).HasColumnName("ReceiptID");
+            entity.Property(e => e.ServiceID).HasColumnName("ServiceID");
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Photo_2).WithMany(p => p.ReDetails_3)
-                .HasForeignKey(d => d.PhotocopierId)
+                .HasForeignKey(d => d.PhotocopierID)
                 .HasConstraintName("fk_PhotocopierID");
 
             entity.HasOne(d => d.Recei_3).WithMany(p => p.ReDetails)
-                .HasForeignKey(d => d.ReceiptId)
+                .HasForeignKey(d => d.ReceiptID)
                 .HasConstraintName("fk_ReceiptID");
 
             entity.HasOne(d => d.Ser_2).WithMany(p => p.ReDetails_2)
-                .HasForeignKey(d => d.ServiceId)
+                .HasForeignKey(d => d.ServiceID)
                 .HasConstraintName("fk_ServiceID");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("pk_RoleID");
+            entity.HasKey(e => e.RoleID).HasName("pk_RoleID");
 
             entity.ToTable("Role");
 
-            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.RoleID).HasColumnName("RoleID");
             entity.Property(e => e.RoleName).HasMaxLength(100);
         });
 
         modelBuilder.Entity<RoleFacilities>(entity =>
         {
-            entity.HasKey(e => e.RoleFacilitiesId).HasName("pk_RoleFacilitiesID");
+            entity.HasKey(e => e.RoleFacilitiesID).HasName("pk_RoleFacilitiesID");
 
-            entity.Property(e => e.RoleFacilitiesId).HasColumnName("RoleFacilitiesID");
-            entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
-            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.RoleFacilitiesID).HasColumnName("RoleFacilitiesID");
+            entity.Property(e => e.FacilityID).HasColumnName("FacilityID");
+            entity.Property(e => e.RoleID).HasColumnName("RoleID");
 
             entity.HasOne(d => d.Facility_3).WithMany(p => p.RoleFaci)
-                .HasForeignKey(d => d.FacilityId)
+                .HasForeignKey(d => d.FacilityID)
                 .HasConstraintName("fk_FacilityID_3");
 
             entity.HasOne(d => d.Rl_3).WithMany(p => p.RFacilities)
-                .HasForeignKey(d => d.RoleId)
+                .HasForeignKey(d => d.RoleID)
                 .HasConstraintName("fk_RoleID_2");
         });
 
         modelBuilder.Entity<RoleFunction>(entity =>
         {
-            entity.HasKey(e => e.RoleFunctionId).HasName("pk_RoleFunctionID");
+            entity.HasKey(e => e.RoleFunctionID).HasName("pk_RoleFunctionID");
 
             entity.ToTable("RoleFunction");
 
-            entity.Property(e => e.RoleFunctionId).HasColumnName("RoleFunctionID");
-            entity.Property(e => e.FunctionId).HasColumnName("FunctionID");
-            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.RoleFunctionID).HasColumnName("RoleFunctionID");
+            entity.Property(e => e.FunctionID).HasColumnName("FunctionID");
+            entity.Property(e => e.RoleID).HasColumnName("RoleID");
 
             entity.HasOne(d => d.Func).WithMany(p => p.RFunctions)
-                .HasForeignKey(d => d.FunctionId)
+                .HasForeignKey(d => d.FunctionID)
                 .HasConstraintName("fk_FunctionID");
 
             entity.HasOne(d => d.Rl).WithMany(p => p.RFunctions_2)
-                .HasForeignKey(d => d.RoleId)
+                .HasForeignKey(d => d.RoleID)
                 .HasConstraintName("FK_RoleFunction_Role");
         });
 
@@ -523,26 +523,26 @@ public partial class PhotoCmsContext : DbContext
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.HasKey(e => e.ServiceId).HasName("pk_ServiceID");
+            entity.HasKey(e => e.ServiceID).HasName("pk_ServiceID");
 
             entity.ToTable("Service");
 
-            entity.Property(e => e.ServiceId).HasColumnName("ServiceID");
+            entity.Property(e => e.ServiceID).HasColumnName("ServiceID");
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.ServiceCategory).HasMaxLength(250);
-            entity.Property(e => e.ServiceGroupId).HasColumnName("ServiceGroupID");
+            entity.Property(e => e.ServiceGroupID).HasColumnName("ServiceGroupID");
             entity.Property(e => e.ServiceName).HasMaxLength(250);
 
             entity.HasOne(d => d.SerGroup).WithMany(p => p.Ser)
-                .HasForeignKey(d => d.ServiceGroupId)
+                .HasForeignKey(d => d.ServiceGroupID)
                 .HasConstraintName("fk_ServiceGroupID");
         });
 
         modelBuilder.Entity<ServiceGroups>(entity =>
         {
-            entity.HasKey(e => e.ServiceGroupId).HasName("pk_ServiceGroupID");
+            entity.HasKey(e => e.ServiceGroupID).HasName("pk_ServiceGroupID");
 
-            entity.Property(e => e.ServiceGroupId).HasColumnName("ServiceGroupID");
+            entity.Property(e => e.ServiceGroupID).HasColumnName("ServiceGroupID");
             entity.Property(e => e.Category).HasMaxLength(100);
             entity.Property(e => e.GroupName).HasMaxLength(250);
         });
@@ -594,10 +594,10 @@ public partial class PhotoCmsContext : DbContext
 
         modelBuilder.Entity<Users>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("pk_UserID");
+            entity.HasKey(e => e.UserID).HasName("pk_UserID");
 
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.UserID).HasColumnName("UserID");
+            entity.Property(e => e.CustomerID).HasColumnName("CustomerID");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.Password)
@@ -606,26 +606,26 @@ public partial class PhotoCmsContext : DbContext
             entity.Property(e => e.UserName).HasMaxLength(100);
 
             entity.HasOne(d => d.Ctm_4).WithMany(p => p.Usr)
-                .HasForeignKey(d => d.CustomerId)
+                .HasForeignKey(d => d.CustomerID)
                 .HasConstraintName("fk_CustomerID_3");
         });
 
         modelBuilder.Entity<UsersRole>(entity =>
         {
-            entity.HasKey(e => e.UsersRoleId).HasName("pk_UsersRoleID");
+            entity.HasKey(e => e.UsersRoleID).HasName("pk_UsersRoleID");
 
             entity.ToTable("UsersRole");
 
-            entity.Property(e => e.UsersRoleId).HasColumnName("UsersRoleID");
-            entity.Property(e => e.RoleId).HasColumnName("RoleID");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.UsersRoleID).HasColumnName("UsersRoleID");
+            entity.Property(e => e.RoleID).HasColumnName("RoleID");
+            entity.Property(e => e.UserID).HasColumnName("UserID");
 
             entity.HasOne(d => d.Rl_2).WithMany(p => p.URoles_2)
-                .HasForeignKey(d => d.RoleId)
+                .HasForeignKey(d => d.RoleID)
                 .HasConstraintName("fk_RoleID");
 
             entity.HasOne(d => d.Usr_2).WithMany(p => p.URoles)
-                .HasForeignKey(d => d.UserId)
+                .HasForeignKey(d => d.UserID)
                 .HasConstraintName("fk_UserID_2");
         });
 

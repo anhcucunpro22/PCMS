@@ -6,7 +6,7 @@ namespace PCMS.Models
     public class Functions
     {
         [Key]
-        public int FunctionId { get; set; }
+        public int FunctionID { get; set; }
 
         public string? FunctionName { get; set; }
 
@@ -14,6 +14,6 @@ namespace PCMS.Models
 
         public bool? IsActive { get; set; }
 
-        public ICollection<RoleFunction> RFunctions { get; set; } = new List<RoleFunction>();
+        public ICollection<RoleFunction>? RFunctions { get; set; }
     }
 }
