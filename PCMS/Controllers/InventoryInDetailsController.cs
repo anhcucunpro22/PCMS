@@ -99,7 +99,7 @@ namespace PCMS.Controllers
                 }
                 else
                 {
-                    return NotFound($"InventoryIn with ID {InventoryInDetailID} not found.");
+                    return NotFound($"InventoryInDetails with ID {InventoryInDetailID} not found.");
                 }
             }
             catch (Exception exc)

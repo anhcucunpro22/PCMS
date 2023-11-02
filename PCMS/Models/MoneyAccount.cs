@@ -6,7 +6,7 @@ namespace PCMS.Models
     public class MoneyAccount
     {
         [Key]
-        public int AccountId { get; set; }
+        public int AccountID { get; set; }
 
         public string? AccountName { get; set; }
 
@@ -30,6 +30,6 @@ namespace PCMS.Models
 
         public string? Notes { get; set; }
 
-        public ICollection<Receipts> Recei_2 { get; set; } = new List<Receipts>();
+        public ICollection<Receipts>? Recei_2 { get; set; }
     }
 }

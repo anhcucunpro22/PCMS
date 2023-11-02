@@ -6,7 +6,7 @@ namespace PCMS.Models
     public class EquipmentTypes
     {
         [Key]
-        public int EquipmentTypeId { get; set; }
+        public int EquipmentTypeID { get; set; }
 
         public string? TypeName { get; set; }
 

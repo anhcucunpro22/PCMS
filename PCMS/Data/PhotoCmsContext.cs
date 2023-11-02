@@ -80,9 +80,9 @@ public partial class PhotoCmsContext : DbContext
     {
         modelBuilder.Entity<Customers>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("pk_CustomerID");
+            entity.HasKey(e => e.CustomerID).HasName("pk_CustomerID");
 
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.OrganizationID).HasColumnName("CustomerID");
             entity.Property(e => e.Address).HasMaxLength(250);
             entity.Property(e => e.ContactPerson).HasMaxLength(50);
             entity.Property(e => e.CustomerName).HasMaxLength(50);
@@ -90,27 +90,27 @@ public partial class PhotoCmsContext : DbContext
                 .HasMaxLength(150)
                 .IsUnicode(false);
             entity.Property(e => e.Industry).HasMaxLength(250);
-            entity.Property(e => e.OrganizationId).HasColumnName("OrganizationID");
+            entity.Property(e => e.OrganizationID).HasColumnName("OrganizationID");
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
             entity.HasOne(d => d.Organiza_3).WithMany(p => p.Ctm)
-                .HasForeignKey(d => d.OrganizationId)
+                .HasForeignKey(d => d.OrganizationID)
                 .HasConstraintName("fk_OrganizationID_2");
         });
 
         modelBuilder.Entity<DebtCollection>(entity =>
         {
-            entity.HasKey(e => e.DebtCollectionId).HasName("pk_DebtCollectionID");
+            entity.HasKey(e => e.DebtCollectionID).HasName("pk_DebtCollectionID");
 
             entity.ToTable("DebtCollection");
 
-            entity.Property(e => e.DebtCollectionId).HasColumnName("DebtCollectionID");
+            entity.Property(e => e.DebtCollectionID).HasColumnName("DebtCollectionID");
             entity.Property(e => e.AmountPaid).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.CollectionDate).HasColumnType("date");
             entity.Property(e => e.CreatedBy).HasMaxLength(50);
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.CustomerID).HasColumnName("CustomerID");
             entity.Property(e => e.DebtAmount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.InvoiceDate).HasColumnType("datetime");
             entity.Property(e => e.PaymentMethod).HasMaxLength(100);
@@ -121,15 +121,15 @@ public partial class PhotoCmsContext : DbContext
             entity.Property(e => e.Status).HasMaxLength(50);
 
             entity.HasOne(d => d.Ctm_2).WithMany(p => p.Debt)
-                .HasForeignKey(d => d.CustomerId)
+                .HasForeignKey(d => d.CustomerID)
                 .HasConstraintName("FK_DebtCollection_Customers");
         });
 
         modelBuilder.Entity<EquipmentTypes>(entity =>
         {
-            entity.HasKey(e => e.EquipmentTypeId).HasName("pk_EquipmentTypeID");
+            entity.HasKey(e => e.EquipmentTypeID).HasName("pk_EquipmentTypeID");
 
-            entity.Property(e => e.EquipmentTypeId).HasColumnName("EquipmentTypeID");
+            entity.Property(e => e.EquipmentTypeID).HasColumnName("EquipmentTypeID");
             entity.Property(e => e.Manufacturer).HasMaxLength(250);
             entity.Property(e => e.Model).HasMaxLength(100);
             entity.Property(e => e.PurchasePrice).HasColumnType("decimal(10, 2)");
@@ -274,30 +274,30 @@ public partial class PhotoCmsContext : DbContext
 
         modelBuilder.Entity<InventoryOutDetails>(entity =>
         {
-            entity.HasKey(e => e.InventoryOutDetailId).HasName("pk_InventoryOutDetailID");
+            entity.HasKey(e => e.InventoryOutDetailID).HasName("pk_InventoryOutDetailID");
 
-            entity.Property(e => e.InventoryOutDetailId).HasColumnName("InventoryOutDetailID");
-            entity.Property(e => e.EquipmentTypeId).HasColumnName("EquipmentTypeID");
-            entity.Property(e => e.InventoryOutId).HasColumnName("InventoryOutID");
-            entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
+            entity.Property(e => e.InventoryOutDetailID).HasColumnName("InventoryOutDetailID");
+            entity.Property(e => e.EquipmentTypeID).HasColumnName("EquipmentTypeID");
+            entity.Property(e => e.InventoryOutID).HasColumnName("InventoryOutID");
+            entity.Property(e => e.MaterialID).HasColumnName("MaterialID");
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.UnitOfMeasureId).HasColumnName("UnitOfMeasureID");
+            entity.Property(e => e.UnitOfMeasureID).HasColumnName("UnitOfMeasureID");
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.EquipType_2).WithMany(p => p.InvenOutDetails_4)
-                .HasForeignKey(d => d.EquipmentTypeId)
+                .HasForeignKey(d => d.EquipmentTypeID)
                 .HasConstraintName("fk_EquipmentTypeID");
 
             entity.HasOne(d => d.InvenOuts_4).WithMany(p => p.InvenOutDetails_3)
-                .HasForeignKey(d => d.InventoryOutId)
+                .HasForeignKey(d => d.InventoryOutID)
                 .HasConstraintName("fk_InventoryOutID");
 
             entity.HasOne(d => d.Materialist_3).WithMany(p => p.InvenOutDetails)
-                .HasForeignKey(d => d.MaterialId)
+                .HasForeignKey(d => d.MaterialID)
                 .HasConstraintName("fk_MaterialID_2");
 
             entity.HasOne(d => d.UnitMeasure_2).WithMany(p => p.InvenOutDetails_2)
-                .HasForeignKey(d => d.UnitOfMeasureId)
+                .HasForeignKey(d => d.UnitOfMeasureID)
                 .HasConstraintName("fk_UnitOfMeasureID_2");
         });
 
@@ -326,11 +326,11 @@ public partial class PhotoCmsContext : DbContext
 
         modelBuilder.Entity<MoneyAccount>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("pk_AccountID");
+            entity.HasKey(e => e.AccountID).HasName("pk_AccountID");
 
             entity.ToTable("MoneyAccount");
 
-            entity.Property(e => e.AccountId).HasColumnName("AccountID");
+            entity.Property(e => e.AccountID).HasColumnName("AccountID");
             entity.Property(e => e.AccountName).HasMaxLength(100);
             entity.Property(e => e.AccountNumber).HasMaxLength(50);
             entity.Property(e => e.AccountType).HasMaxLength(20);

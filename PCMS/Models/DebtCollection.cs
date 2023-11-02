@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PCMS.Models
 {
     public class DebtCollection
     {
         [Key]
-        public int DebtCollectionId { get; set; }
+        public int DebtCollectionID { get; set; }
 
-        public int? CustomerId { get; set; }
+        public int? CustomerID { get; set; }
 
         public DateTime? InvoiceDate { get; set; }
 
@@ -32,6 +33,7 @@ namespace PCMS.Models
 
         public string? CreatedBy { get; set; }
 
+        [ForeignKey("CustomerID")]
         public Customers? Ctm_2 { get; set; }
     }
 }
