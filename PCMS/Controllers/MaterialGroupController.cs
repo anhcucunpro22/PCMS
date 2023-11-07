@@ -6,11 +6,14 @@ using System;
 using System.Text.RegularExpressions;
 using PCMS.Data;
 using PCMS.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PCMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+
     public class MaterialGroupController : ControllerBase
     {
 

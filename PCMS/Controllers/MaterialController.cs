@@ -4,9 +4,11 @@ using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PCMS.Models;
 using PCMS.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PCMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MaterialController : ControllerBase
