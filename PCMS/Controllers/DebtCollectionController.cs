@@ -26,6 +26,15 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.DebtCollection
+                .Include(m => m.Ctm_2)
+                .FirstOrDefault(m => m.DebtCollectionID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(DebtCollection dec)
         {

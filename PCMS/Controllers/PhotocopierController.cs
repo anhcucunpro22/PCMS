@@ -27,6 +27,15 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.Photocopier
+                .Include(m => m.Facility_2)
+                .FirstOrDefault(m => m.PhotocopierID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(Photocopier phoc)
         {

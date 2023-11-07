@@ -28,6 +28,16 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.RoleFunction
+                .Include(m => m.Func)
+                .Include(m => m.Rl)
+                .FirstOrDefault(m => m.RoleFunctionID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(RoleFunction rlf)
         {

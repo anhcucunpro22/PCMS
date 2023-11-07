@@ -24,59 +24,25 @@ namespace PCMS.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-
-
-            //string query = @"
-            //                select MaterialID, MaterialGroupID, MaterialName from
-            //                dbo.Materials
-            //                ";
-            //DataTable table = new DataTable();
-            //string sqlDataSource = _configuration.GetConnectionString("PCMSAppCon");
-            //SqlDataReader myReader;
-            //using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            //{
-            //    myCon.Open();
-            //    using (SqlCommand myCommand = new SqlCommand(query, myCon))
-            //    {
-            //        myReader = myCommand.ExecuteReader();
-            //        table.Load(myReader);
-            //        myReader.Close();
-            //        myCon.Close();
-            //    }
-            //}
             var data = _db.Materials
                 .Include(m => m.MaterialGroup_1)
-                //.Where(m=>m.MaterialID <3)
-                //.Select(m=> new {Name = m.MaterialName,m.MaterialGroupID})
                 .ToList();
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.Materials
+                .Include(m => m.MaterialGroup_1)
+                .FirstOrDefault(m => m.MaterialID == id);
+            return new JsonResult(data);
+        }
+
+
         [HttpPost]
         public IActionResult Post(Materials mat)
         {
-            //string query = @"
-            //                    insert into dbo.Materials
-            //                    (MaterialGroupID,MaterialName)
-            //                    values(@MaterialGroupID,@MaterialName)
-
-            //                ";
-            //DataTable table = new DataTable();
-            //string sqlDataSource = _configuration.GetConnectionString("PCMSAppCon");
-            //SqlDataReader myReader;
-            //using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            //{
-            //    myCon.Open();
-            //    using (SqlCommand myCommand = new SqlCommand(query, myCon))
-            //    {
-            //        myCommand.Parameters.AddWithValue("MaterialGroupID", mat.MaterialGroupID);
-            //        myCommand.Parameters.AddWithValue("MaterialName", mat.MaterialName);
-            //        myReader = myCommand.ExecuteReader();
-            //        table.Load(myReader);
-            //        myReader.Close();
-            //        myCon.Close();
-            //    }
-            //}
             try
             {
 
@@ -91,33 +57,11 @@ namespace PCMS.Controllers
 
         }
 
+
+
         [HttpPut]
         public IActionResult Put(Materials mat)
         {
-            //string query = @"
-            //                    UPDATE dbo.Materials
-            //                    SET MaterialGroupID = @MaterialGroupID, MaterialName = @MaterialName
-            //                    WHERE MaterialID = @MaterialID;
-            //                    ";
-            //DataTable table = new DataTable();
-            //string sqlDataSource = _configuration.GetConnectionString("PCMSAppCon");
-            //SqlDataReader myReader;
-            //using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            //{
-            //    myCon.Open();
-            //    using (SqlCommand myCommand = new SqlCommand(query, myCon))
-            //    {
-            //        myCommand.Parameters.AddWithValue("MaterialID", mat.MaterialID);
-            //        myCommand.Parameters.AddWithValue("MaterialGroupID", mat.MaterialGroupID);
-            //        myCommand.Parameters.AddWithValue("MaterialName", mat.MaterialName);
-            //        myReader = myCommand.ExecuteReader();
-            //        table.Load(myReader);
-            //        myReader.Close();
-            //        myCon.Close();
-            //    }
-            //}
-
-            //return new JsonResult("Update Successfully");
             try
             {
 
@@ -125,7 +69,7 @@ namespace PCMS.Controllers
 
                 if (existingMaterial != null)
                 {
-                    
+
                     existingMaterial.MaterialGroupID = mat.MaterialGroupID;
                     existingMaterial.MaterialName = mat.MaterialName;
 
@@ -147,33 +91,11 @@ namespace PCMS.Controllers
 
         }
 
+
+
         [HttpDelete("{MaterialID}")]
         public IActionResult Delete(int MaterialID)
         {
-            //    string query = @"
-            //                        Delete from dbo.Materials
-            //                        Where MaterialID = @MaterialID
-            //                        ";
-            //    DataTable table = new DataTable();
-            //    string sqlDataSource = _configuration.GetConnectionString("PCMSAppCon");
-            //    SqlDataReader myReader;
-            //    using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            //    {
-            //        myCon.Open();
-            //        using (SqlCommand myCommand = new SqlCommand(query, myCon))
-            //        {
-            //            myCommand.Parameters.AddWithValue("MaterialID", MaterialID);
-            //            myReader = myCommand.ExecuteReader();
-            //            table.Load(myReader);
-            //            myReader.Close();
-            //            myCon.Close();
-            //        }
-            //    }
-
-            //    return new JsonResult("Deleted Successfully");
-
-
-            //}
             try
             {
 

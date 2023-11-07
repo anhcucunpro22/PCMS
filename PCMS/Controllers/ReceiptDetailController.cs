@@ -27,6 +27,17 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.ReceiptDetail
+                .Include(m => m.Photo_2)
+                .Include(m => m.Recei_3)
+                .Include(m => m.Ser_2)
+                .FirstOrDefault(m => m.ReceiptDetailID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(ReceiptDetail red)
         {

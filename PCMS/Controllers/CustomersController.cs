@@ -25,6 +25,16 @@ namespace PCMS.Controllers
                 .ToList();
             return new JsonResult(data);
         }
+
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.Customers
+                .Include(m => m.Organiza_3)
+                .FirstOrDefault(m => m.CustomerID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(Customers ct)
         {

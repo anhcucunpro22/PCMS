@@ -27,6 +27,15 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.Service
+                .Include(m => m.SerGroup)
+                .FirstOrDefault(m => m.ServiceID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(Service ser)
         {

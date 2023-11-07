@@ -27,6 +27,15 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.TrainingFacilities
+
+                .FirstOrDefault(m => m.FacilityId == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(TrainingFacilities tf)
         {

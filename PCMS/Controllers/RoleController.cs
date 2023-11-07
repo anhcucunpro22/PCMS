@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PCMS.Data;
 using PCMS.Models;
 
@@ -23,6 +24,15 @@ namespace PCMS.Controllers
             var data = _db.Role
                 
                 .ToList();
+            return new JsonResult(data);
+        }
+
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.Role
+
+                .FirstOrDefault(m => m.RoleID == id);
             return new JsonResult(data);
         }
 

@@ -27,6 +27,17 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.InventoryInDetails
+                .Include(m => m.InvenIn)
+                .Include(n => n.Materials_2)
+                 .Include(n => n.UnitMeasure)
+                .FirstOrDefault(m => m.InventoryInDetailID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(InventoryInDetails itd)
         {

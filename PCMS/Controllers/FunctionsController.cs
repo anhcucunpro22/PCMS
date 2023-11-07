@@ -26,6 +26,15 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            var data = _db.Functions
+
+                .FirstOrDefault(m => m.FunctionID == id);
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(Functions fuc)
         {
