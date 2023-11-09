@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using PCMS.AppModels;
 using PCMS.Data;
+using PCMS.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -22,7 +23,43 @@ namespace PCMS.Controllers
             _configuration = configuration;
         }
 
+        [HttpPost]
+        [Route("PostRegisterDetails")]
+        public async Task<IActionResult> PostRegisterDetails(UserAuthen _userAuthen)
+        {
+            if (_userAuthen != null)
+            {
+                // Check if the user with the same email already exists in the database
+                var existingUser = _db.Users.FirstOrDefault(e => e.Email == _userAuthen.EmailId);
+                if (existingUser != null)
+                {
+                    return BadRequest("Email already exists");
+                }
 
+                // Create a new user entity and populate its properties
+                var newUser = new Users
+                {
+                    UserName = _userAuthen.UserName,
+                    FullName = _userAuthen.FullName,
+                    Email = _userAuthen.EmailId,
+                    Password = _userAuthen.Password,
+                    Isactive = true,
+                    Notes = _userAuthen.Notes,
+                };
+
+                // Add the new user to the database
+                _db.Users.Add(newUser);
+                await _db.SaveChangesAsync();
+
+                _userAuthen.UserMessage = "Registration Success";
+
+                return Ok(_userAuthen);
+            }
+            else
+            {
+                return BadRequest("No Data Posted");
+            }
+        }
 
         [HttpPost]
         [Route("PostLoginDetails")]
