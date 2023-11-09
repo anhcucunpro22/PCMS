@@ -42,7 +42,7 @@ namespace PCMS.Controllers
                     UserName = _userAuthen.UserName,
                     FullName = _userAuthen.FullName,
                     Email = _userAuthen.EmailId,
-                    Password = _userAuthen.Password,
+                    Password = _userAuthen.HashPassword(_userAuthen.Password), // Mã hóa password trước khi lưu vào cơ sở dữ liệu
                     Isactive = true,
                     Notes = _userAuthen.Notes,
                 };
@@ -67,8 +67,10 @@ namespace PCMS.Controllers
         {
             if (_userData != null)
             {
+                var hashedPassword = _userData.HashPassword(_userData.Password);
+
                 var resultLoginCheck = _db.Users
-                    .Where(e => e.Email == _userData.EmailId && e.Password == _userData.Password)
+                    .Where(e => e.Email == _userData.EmailId && e.Password == hashedPassword)
                     .FirstOrDefault();
                 if (resultLoginCheck == null)
                 {

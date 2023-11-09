@@ -601,7 +601,7 @@ public partial class PhotoCmsContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.Password)
-                .HasMaxLength(50)
+                .HasMaxLength(256)
                 .IsUnicode(false);
             entity.Property(e => e.UserName).HasMaxLength(100);
 
