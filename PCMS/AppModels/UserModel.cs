@@ -14,13 +14,13 @@ namespace PCMS.AppModels
         public string? AccessToken { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public string HashPassword(string password)
+        public bool VerifyPassword(string inputPassword, string hashedPassword)
         {
             using (var sha256 = SHA256.Create())
             {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputPassword));
                 var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-                return hash;
+                return hash == hashedPassword;
             }
         }
     }

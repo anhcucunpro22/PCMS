@@ -61,23 +61,28 @@ namespace PCMS.Controllers
             }
         }
 
+        
+
         [HttpPost]
         [Route("PostLoginDetails")]
         public async Task<IActionResult> PostLoginDetails(UserModel _userData)
         {
             if (_userData != null)
             {
-                var hashedPassword = _userData.HashPassword(_userData.Password);
-
-                var resultLoginCheck = _db.Users
-                    .Where(e => e.Email == _userData.EmailId && e.Password == hashedPassword)
-                    .FirstOrDefault();
-                if (resultLoginCheck == null)
+                var user = _db.Users.FirstOrDefault(e => e.Email == _userData.EmailId);
+                if (user == null)
                 {
                     return BadRequest("Invalid Credentials");
                 }
                 else
                 {
+                    var userModel = new UserModel(); // Create an instance of UserModel
+                    bool isPasswordValid = userModel.VerifyPassword(_userData.Password, user.Password); // Call VerifyPassword on the userModel instance
+                    if (!isPasswordValid)
+                    {
+                        return BadRequest("Invalid Credentials");
+                    }
+
                     _userData.UserMessage = "Login Success";
 
                     var claims = new[] {
