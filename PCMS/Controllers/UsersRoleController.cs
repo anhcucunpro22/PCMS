@@ -7,7 +7,7 @@ using PCMS.Models;
 
 namespace PCMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersRoleController : ControllerBase

@@ -78,22 +78,23 @@ public partial class PhotoCmsContext : DbContext
     
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
     {
+
+
         modelBuilder.Entity<Customers>(entity =>
         {
             entity.HasKey(e => e.CustomerID).HasName("pk_CustomerID");
 
+
             entity.Property(e => e.OrganizationID).HasColumnName("CustomerID");
             entity.Property(e => e.Address).HasMaxLength(250);
-            entity.Property(e => e.ContactPerson).HasMaxLength(50);
+            entity.Property(e => e.Faculty).HasMaxLength(250);
             entity.Property(e => e.CustomerName).HasMaxLength(50);
-            entity.Property(e => e.Email)
-                .HasMaxLength(150)
-                .IsUnicode(false);
-            entity.Property(e => e.Industry).HasMaxLength(250);
             entity.Property(e => e.OrganizationID).HasColumnName("OrganizationID");
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.CodeUser).HasMaxLength(20);
+            entity.Property(e => e.Gender).HasMaxLength(20);
 
             entity.HasOne(d => d.Organiza_3).WithMany(p => p.Ctm)
                 .HasForeignKey(d => d.OrganizationID)
@@ -598,7 +599,10 @@ public partial class PhotoCmsContext : DbContext
 
             entity.Property(e => e.UserID).HasColumnName("UserID");
             entity.Property(e => e.CustomerID).HasColumnName("CustomerID");
-            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Email)
+            .HasMaxLength(150)
+            .IsUnicode(false);
+          
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.Password)
                 .HasMaxLength(256)

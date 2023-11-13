@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PCMS.AppModels;
 using PCMS.Data;
 using PCMS.Models;
 
 namespace PCMS.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -18,17 +19,18 @@ namespace PCMS.Controllers
             _db = db;
         }
 
-
-        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [HttpGet] //Admin xem mọi thông tin sẽ có Include
         public JsonResult Get()
         {
             var data = _db.Customers
                 .Include(m => m.Organiza_3)
                 .ToList();
             return new JsonResult(data);
+            
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] //Admin xem mọi thông tin sẽ có Include
         public JsonResult Get(int id)
         {
             var data = _db.Customers
@@ -36,6 +38,7 @@ namespace PCMS.Controllers
                 .FirstOrDefault(m => m.CustomerID == id);
             return new JsonResult(data);
         }
+
 
         [HttpPost]
         public IActionResult Post(Customers ct)
@@ -68,8 +71,9 @@ namespace PCMS.Controllers
                     existingCustomers.CustomerName = ct.CustomerName;
                     existingCustomers.Address = ct.Address;
                     existingCustomers.Phone = ct.Phone;
-                    existingCustomers.Email = ct.Email;
-                    existingCustomers.Industry = ct.Industry;
+                    existingCustomers.Faculty = ct.Faculty;
+                    existingCustomers.CodeUser = ct.CodeUser;
+                    existingCustomers.Gender = ct.Gender;
                     existingCustomers.Notes = ct.Notes;
                     existingCustomers.OrganizationID = ct.OrganizationID;
 

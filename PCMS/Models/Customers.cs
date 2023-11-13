@@ -14,12 +14,11 @@ namespace PCMS.Models
         public string? Address { get; set; }
 
         public string? Phone { get; set; }
+        public string? Faculty { get; set; }
 
-        public string? Email { get; set; }
+        public string? CodeUser {  get; set; }
 
-        public string? ContactPerson { get; set; }
-
-        public string? Industry { get; set; }
+        public string? Gender { get; set; }
 
         public string? Notes { get; set; }
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PCMS.AppModels;
 using PCMS.Data;
 using PCMS.Models;
 
@@ -20,7 +21,7 @@ namespace PCMS.Controllers
             _db = db;
         }
 
-        [HttpGet]
+        [HttpGet] //To do list for Admin
         public JsonResult Get()
         {
             var data = _db.Users
@@ -38,12 +39,23 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        [HttpGet("list")]
+        public JsonResult GetToDoList()
+        {
+            var data = _db.Users
+                .Include(m => m.Ctm_4)
+                .Where(t => t.UserID >= 1 && t.UserID <= 500)
+                .ToList();
+            return new JsonResult(data);
+        }
+
         [HttpPost]
         public IActionResult Post(Users use)
         {
             try
             {
                 _db.Users.Add(use);
+                use.Password = use.HashPassword(use.Password);
                 _db.SaveChanges();
                 return new JsonResult("Added Successfully");
             }
@@ -67,7 +79,7 @@ namespace PCMS.Controllers
                     existingUsers.UserName = use.UserName;
                     existingUsers.FullName = use.FullName;
                     existingUsers.Email = use.Email;
-                    existingUsers.Password = use.Password;
+                    existingUsers.Password = use.HashPassword(use.Password);
                     existingUsers.Notes = use.Notes;
                     existingUsers.Isactive = use.Isactive;
                     existingUsers.CustomerID = use.CustomerID;
