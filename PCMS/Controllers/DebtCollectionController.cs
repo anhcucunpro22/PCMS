@@ -42,6 +42,7 @@ namespace PCMS.Controllers
         {
             try
             {
+                dec.RemainingAmount = dec.DebtAmount - dec.AmountPaid;
 
                 _db.DebtCollection.Add(dec);
                 _db.SaveChanges();

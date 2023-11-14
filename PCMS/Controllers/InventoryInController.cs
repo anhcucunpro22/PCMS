@@ -43,6 +43,7 @@ namespace PCMS.Controllers
         {
             try
             {
+                ivi.Total_amount = ivi.AmountReceived + ivi.Tax_amount - ivi.Percentage_discount;
                 _db.InventoryIn.Add(ivi);
                 _db.SaveChanges();
                 return new JsonResult("Added Successfully");

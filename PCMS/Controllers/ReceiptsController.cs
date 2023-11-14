@@ -44,7 +44,8 @@ namespace PCMS.Controllers
         {
             try
             {
-
+                rec.Total_amount = rec.AmountReceived + rec.Tax_amount 
+                    - rec.Discount_amount - rec.DepositPayment;
                 _db.Receipts.Add(rec);
                 _db.SaveChanges();
                 return new JsonResult("Added Successfully");

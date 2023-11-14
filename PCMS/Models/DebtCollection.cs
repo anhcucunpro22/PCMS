@@ -23,7 +23,17 @@ namespace PCMS.Models
         /// <summary>
         /// RemainingAmount = DebtAmount - Amount Paid
         /// </summary>
-        public decimal? RemainingAmount { get; set; }
+        public decimal? RemainingAmount
+        {
+            get
+            {
+                return DebtAmount  - AmountPaid;
+            }
+            set
+            {
+                // Không cần thực hiện gì trong phương thức setter
+            }
+        }
 
         public string? Notes { get; set; }
 

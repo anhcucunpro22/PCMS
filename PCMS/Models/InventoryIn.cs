@@ -26,7 +26,17 @@ namespace PCMS.Models
 
         public decimal? Tax_amount { get; set; }
 
-        public decimal? Total_amount { get; set; }
+        public decimal? Total_amount
+        {
+            get
+            {
+                return AmountReceived + Tax_amount - Percentage_discount;
+            }
+            set
+            {
+                // Không cần thực hiện gì trong phương thức setter
+            }
+        }
 
         public string? PaymentMethod { get; set; }
 

@@ -19,8 +19,9 @@ namespace PCMS.Controllers
             _db = db;
         }
 
-        [Authorize(Roles = "Admin")]
+        
         [HttpGet] //Admin xem mọi thông tin sẽ có Include
+        [Authorize(Roles = "Admin")]
         public JsonResult Get()
         {
             var data = _db.Customers
@@ -30,7 +31,10 @@ namespace PCMS.Controllers
             
         }
 
+
+        
         [HttpGet("{id}")] //Admin xem mọi thông tin sẽ có Include
+        [Authorize(Roles = "Admin")]
         public JsonResult Get(int id)
         {
             var data = _db.Customers
@@ -39,8 +43,11 @@ namespace PCMS.Controllers
             return new JsonResult(data);
         }
 
+        
+
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post(Customers ct)
         {
             try

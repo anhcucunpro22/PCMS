@@ -18,6 +18,7 @@ builder.Services.AddDbContext<PhotoCmsContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("PCMSAppCon")));
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+builder.Services.AddTransient<ICustomerApi, CustomerApi>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

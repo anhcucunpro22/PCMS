@@ -31,9 +31,19 @@ namespace PCMS.Models
         public decimal? Tax_Amount { get; set; }
 
         /// <summary>
-        /// Tong_tien=AmountReceived+Tax_Amount-Percentage_Discount
+        /// Tong_tien=TotalAmount+Tax_Amount-Percentage_Discount
         /// </summary>
-        public decimal? Tong_tien { get; set; }
+        public decimal? Tong_tien 
+        {
+            get
+            {
+                return TotalAmount + Tax_Amount - Percentage_Discount;
+            }
+            set
+            {
+                // Không cần thực hiện gì trong phương thức setter
+            }
+        }
 
         public string? Created_by { get; set; }
 
